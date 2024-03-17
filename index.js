@@ -1,40 +1,3 @@
-// var express = require('express');
-// const path = require("path")
-// var ejs=require('ejs')
-
-
-// var app = express();
-// require('./database/db')
-// app.use(express.json())
-
-// app.use(express.static('public'));
-// app.set('view engine','ejs');
-
-
-// app.listen(5000,(req,res)=>{
-//     console.log("runnn")
-// });
-
-
-// app.get('/',function(req,res){
-
-//     res.render('pages/index');
-
-// });
-
-
-// app.get('/about',function(req,res){
-
-//     res.render('pages/about');
-
-// });
-
-
-// app.get('/contact',function(req,res){
-
-//     res.render('pages/contact');
-
-// });
 
 
 var express = require('express');
@@ -43,10 +6,11 @@ var ejs = require('ejs')
 const MongoClient = require('mongodb').MongoClient;
 const axios = require('axios')
 var app = express();
+const cors = require('cors')
 require('./db/db')
 
-app.use(express.json());
-const mongoURL = 
+app.use(cors())
+app.use(express.json())
 
 // Serve static files using express.static
 app.use(express.static(path.join(__dirname, './public')));
