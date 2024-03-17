@@ -54,9 +54,9 @@ app.use(express.static(path.join(__dirname, './public')));
 
 app.set('view engine', 'ejs');
 
-app.listen(5000, () => {
-    console.log("Server is running on port 5000");
-});
+// app.listen(5000, () => {
+//     console.log("Server is running on port 5000");
+// });
 
 // Explicitly set the MIME type for script.js
 app.get('/public/js/script.js', (req, res) => {
@@ -225,3 +225,9 @@ app.post('/searchByBloodTypeForEachHospital', async (req, res) => {
 //     .catch(error => {
 //         console.error('Error searching by blood type:', error);
     // }); 
+
+
+const port = process.env.PORT || 3000; // استخدام المنفذ المقدم من Heroku أو الافتراضي 3000
+app.listen(port, () => {
+    console.log(`الخادم يعمل على المنفذ ${port}`);
+});
