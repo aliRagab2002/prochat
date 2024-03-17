@@ -93,46 +93,46 @@ app.get('/getData', async (req, res) => {
 //     res.json({ message: 'Choose blood type', options: bloodTypes });
 // });
 
-// app.post('/searchByBloodType', async (req, res) => {
-//     try {
-//         const selectedBloodType = req.body.selectedBloodType;
-//         const results = await Done.find({ bloodType: selectedBloodType }).maxTimeMS(30000);
-//         res.json({ message: 'Search results', data: results });
-//     } catch (error) {
-//         console.error('Error searching in database:', error);
-//         res.status(500).json({ error: 'Internal Server Error' });
-//     }
-// });
-
 app.post('/searchByBloodType', async (req, res) => {
-    const bloodTypes = ['A+', 'A-', 'B+', 'B-', 'O+', 'O-', 'AB+', 'AB-'];
-
-    
-    const resultsByBloodType = {};
-    const bloodAmounts = {};
-
     try {
-        
         const selectedBloodType = req.body.selectedBloodType;
-
-    
         const results = await Done.find({ bloodType: selectedBloodType }).maxTimeMS(30000);
-
-        
-        const totalBloodAmount = results.reduce((total, donor) => {
-            return total + donor.bloodAmount;
-        }, 0);
-
-        
-        resultsByBloodType[selectedBloodType] = results;
-        bloodAmounts[selectedBloodType] = totalBloodAmount;
-
-        res.json({ message: 'Search results', data: resultsByBloodType, bloodAmounts });
+        res.json({ message: 'Search results', data: results });
     } catch (error) {
         console.error('Error searching in database:', error);
         res.status(500).json({ error: 'Internal Server Error' });
     }
 });
+
+// app.post('/searchByBloodType', async (req, res) => {
+//     const bloodTypes = ['A+', 'A-', 'B+', 'B-', 'O+', 'O-', 'AB+', 'AB-'];
+
+    
+//     const resultsByBloodType = {};
+//     const bloodAmounts = {};
+
+//     try {
+        
+//         const selectedBloodType = req.body.selectedBloodType;
+
+    
+//         const results = await Done.find({ bloodType: selectedBloodType }).maxTimeMS(30000);
+
+        
+//         const totalBloodAmount = results.reduce((total, donor) => {
+//             return total + donor.bloodAmount;
+//         }, 0);
+
+        
+//         resultsByBloodType[selectedBloodType] = results;
+//         bloodAmounts[selectedBloodType] = totalBloodAmount;
+
+//         res.json({ message: 'Search results', data: resultsByBloodType, bloodAmounts });
+//     } catch (error) {
+//         console.error('Error searching in database:', error);
+//         res.status(500).json({ error: 'Internal Server Error' });
+//     }
+// });
 
 app.post('/searchByBloodTypeForEachHospital', async (req, res) => {
    
